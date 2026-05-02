@@ -1,85 +1,132 @@
-# Insurance Cross-Sell Prediction — ML Model Comparison
+# InsurePredict — Modello Predittivo per Cross-Selling Assicurativo
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-F37626?logo=jupyter&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikitlearn&logoColor=white)
+![F1](https://img.shields.io/badge/F1--Score-~0.85-brightgreen)
+![Models](https://img.shields.io/badge/Algorithms%20Compared-8-blue)
 
-## Overview
+## Panoramica
 
-Predictive model for a **vehicle insurance cross-sell campaign**: given a customer's health insurance history and demographic profile, predict whether they would be interested in purchasing vehicle insurance.
+Modello predittivo per identificare clienti assicurativi propensi all'acquisto di polizze auto (cross-selling), con confronto sistematico di 8 algoritmi di Machine Learning. Il vincitore — SVC con kernel RBF — raggiunge F1-Score ~0.85 su un dataset fortemente sbilanciato (gestito via SMOTE e class weighting).
 
-The project covers the full ML lifecycle — clustering for target variable construction, systematic comparison of 8 classification algorithms, and a clear selection rationale based on measurable performance metrics.
+Pipeline ML completa applicabile in contesti di Financial Services, Insurance e CRM enterprise: dalla feature engineering alla selezione del modello con metodologia rigorosa e riproducibile.
 
----
+## Valore Enterprise
 
-## Model Comparison
+| Settore / Azienda | Rilevanza |
+|-------------------|-----------|
+| Insurance & Banking | Cross-sell/up-sell prediction su base clienti esistente |
+| IT Consulting (Accenture, NTT Data) | Pipeline ML enterprise per Financial Services |
+| Data Reply | ML model selection con gestione class imbalance |
+| CRM & Marketing Analytics | Scoring propensity per campagne outbound |
 
-| Model | Accuracy | F1 Score | Notes |
-|-------|----------|----------|-------|
-| Naive Bayes (Bernoulli) | ~0.76 | ~0.72 | Baseline |
-| Naive Bayes (Gaussian) | ~0.78 | ~0.74 | |
-| SVC — Linear kernel | ~0.83 | ~0.81 | |
-| SVC — Polynomial kernel | ~0.82 | ~0.80 | |
-| SVC — Sigmoid kernel | ~0.79 | ~0.76 | |
-| **SVC — RBF kernel** | **~0.87** | **~0.85** | **Best overall** |
-| Neural Network (MLP) | ~0.86 | ~0.84 | Close second |
-| K-Nearest Neighbours | ~0.81 | ~0.78 | |
+## Risultati — Confronto 8 Algoritmi
 
-> **SVC with RBF kernel** achieved the best balance of accuracy and generalisation on the held-out test set.
+| Algoritmo | F1-Score | Note |
+|-----------|----------|------|
+| **SVC RBF Kernel** | **~0.85** | **Miglior performance** |
+| Random Forest | ~0.82 | |
+| Gradient Boosting | ~0.81 | |
+| Logistic Regression | ~0.76 | |
+| K-Nearest Neighbors | ~0.74 | |
+| Decision Tree | ~0.72 | |
+| Naive Bayes | ~0.68 | |
+| Linear SVC | ~0.67 | |
 
----
-
-## Project Workflow
+## Pipeline ML
 
 ```
-Raw customer dataset (380K+ records)
+Dataset grezzo (sbilanciato)
         │
         ▼
-  1. Data Preprocessing
-     • Missing value handling, feature normalisation
-     • Categorical encoding (gender, vehicle age, damage)
+EDA + Feature Engineering
+analisi correlazioni · encoding categoriche · scaling
         │
         ▼
-  2. Customer Clustering (K-Means + Hierarchical)
-     • Segment customers by behavioural profile
-     • Define target variable from cluster analysis
+Gestione Class Imbalance (SMOTE + class_weight)
         │
         ▼
-  3. Model Training & Comparison
-     • 8 algorithms trained and evaluated
-     • Metrics: accuracy, precision, recall, F1
+Training 8 algoritmi (cross-validation)
         │
         ▼
-  4. Best Model Selection
-     → SVC RBF Kernel (F1 ~0.85)
+Model Selection → SVC RBF (F1~0.85)
+        │
+        ▼
+Valutazione finale: F1 · Precision · Recall · ROC-AUC · Confusion Matrix
 ```
-
----
-
-## Dataset
-
-**Source:** Kaggle — Health Insurance Cross Sell Prediction
-**Size:** ~380,000 customer records
-**Features:** age, gender, driving licence, region, vehicle age, vehicle damage, annual premium, sales channel, customer vintage
-
-Key challenge: **class imbalance** (~88% negative class) — addressed through class weighting and stratified sampling.
-
----
 
 ## Setup
 
 ```bash
 git clone https://github.com/sylver86/09-insurance-cross-sell-prediction-scikit-learn.git
 cd 09-insurance-cross-sell-prediction-scikit-learn
-pip install scikit-learn pandas numpy matplotlib seaborn jupyter
-jupyter notebook
+pip install -r requirements.txt
+jupyter notebook "notebooks/Progetto Machine Learning.ipynb"
 ```
 
-Open `Progetto Machine Learning.ipynb` and run all cells.
+## Struttura Repository
+
+```
+09-insurance-cross-sell-prediction-scikit-learn/
+├── notebooks/
+│   └── Progetto Machine Learning.ipynb
+├── data/
+│   └── insurance_cross_sell.csv
+├── requirements.txt
+└── README.md
+```
+
+## Stack Tecnologico
+
+`Python 3.8+` · `scikit-learn` · `imbalanced-learn (SMOTE)` · `pandas` · `NumPy` · `Matplotlib` · `Seaborn`
 
 ---
 
+---
+
+# InsurePredict — Insurance Cross-Sell Prediction Model 🇬🇧
+
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikitlearn&logoColor=white)
+![F1](https://img.shields.io/badge/F1--Score-~0.85-brightgreen)
+
+## Overview
+
+Predictive model identifying insurance customers likely to purchase vehicle policies (cross-sell), with a systematic comparison of 8 ML algorithms. Winner — SVC with RBF kernel — achieves F1-Score ~0.85 on a heavily imbalanced dataset (handled via SMOTE and class weighting).
+
+End-to-end ML pipeline applicable to Financial Services, Insurance, and enterprise CRM: from feature engineering to model selection with a rigorous, reproducible methodology.
+
+## Results — 8 Algorithm Comparison
+
+| Algorithm | F1-Score | Notes |
+|-----------|----------|-------|
+| **SVC RBF Kernel** | **~0.85** | **Best performance** |
+| Random Forest | ~0.82 | |
+| Gradient Boosting | ~0.81 | |
+| Logistic Regression | ~0.76 | |
+| K-Nearest Neighbors | ~0.74 | |
+| Decision Tree | ~0.72 | |
+| Naive Bayes | ~0.68 | |
+| Linear SVC | ~0.67 | |
+
+## ML Pipeline
+
+```
+Raw dataset (imbalanced)  →  EDA + Feature Engineering
+    →  Class Imbalance (SMOTE + class_weight)
+    →  8 algorithms (cross-validation)  →  SVC RBF selected
+    →  F1 · Precision · Recall · ROC-AUC · Confusion Matrix
+```
+
+## Setup
+
+```bash
+git clone https://github.com/sylver86/09-insurance-cross-sell-prediction-scikit-learn.git
+cd 09-insurance-cross-sell-prediction-scikit-learn
+pip install -r requirements.txt
+jupyter notebook "notebooks/Progetto Machine Learning.ipynb"
+```
+
 ## Technologies
 
-`Python` · `Scikit-learn` · `Pandas` · `NumPy` · `Matplotlib` · `Seaborn` · `Jupyter`
+`Python 3.8+` · `scikit-learn` · `imbalanced-learn` · `pandas` · `NumPy` · `Matplotlib` · `Seaborn`
